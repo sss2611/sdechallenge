@@ -19,11 +19,7 @@ const LAUNCH_DATE = new Date('2026-11-14T08:00:00-03:00');
 const pad = (n, len = 2) => String(n).padStart(len, '0');
 
 // ---- 3D Flip-card engine ----
-// Each unit (days/hours/min/sec) is a card with a front face (currently
-// shown value) and a back face (the incoming value). On change, the card
-// rotates -180deg on the X axis in real 3D (perspective + preserve-3d),
-// revealing the back face. When the rotation finishes we silently reset
-// the card and swap the front face to the new value, ready for the next flip.
+
 class FlipUnit {
     constructor(cardId) {
         this.card = document.getElementById(cardId);
@@ -99,8 +95,7 @@ updateCountdown();
 setInterval(updateCountdown, 1000);
 
 // ---- Jurado drawer / gallery ----
-// Editá estos dos arrays para agregar/quitar jurados. Cada "img" apunta a
-// un archivo dentro de /public/jurados/ — solo poné la foto ahí con ese nombre.
+
 const JURADO_HONOR = [
     { name: 'Mario Benavente', role: 'Ingeniero en Computación / Intendente de la Ciudad Capital', img: '/public/jurados/intendente.png' },
     { name: 'Jaqueline Digion', role: 'Ingeniera / Institución', img: '/public/jurados/jaqueline.png' },
@@ -128,8 +123,6 @@ function buildJuradoCard(j) {
         </figcaption>
     `;
 
-    // Hasta que exista la foto real en esa ruta, muestra un placeholder
-    // en vez de un ícono de imagen rota.
     const img = card.querySelector('img');
     img.addEventListener('error', () => {
         img.closest('.jurado-photo').classList.add('jurado-photo--empty');
@@ -209,8 +202,7 @@ function buildJuradoGallery() {
 })();
 
 // ---- Team ship slider ----
-// Editá este array para agregar/quitar integrantes. Cada "img" apunta a
-// un archivo dentro de /public/equipo/ — solo poné la foto ahí con ese nombre.
+
 const TEAM = [
     { name: 'Maximiliano Padilla', role: 'Local Lead', img: '/public/equipo/maximiliano.png' },
     { name: 'Sandra Sanchez', role: 'Rol en el equipo', img: '/public/equipo/sandra.png' },
@@ -239,8 +231,6 @@ const TEAM = [
         slide.className = 'ship-slide';
         slide.innerHTML = `<img src="${member.img}" alt="${member.name}" loading="lazy">`;
 
-        // Si la foto todavía no existe en /public/equipo/, mostramos un
-        // placeholder en vez de un ícono de imagen rota.
         const img = slide.querySelector('img');
         img.addEventListener('error', () => {
             slide.classList.add('ship-slide--empty');
@@ -309,8 +299,7 @@ const TEAM = [
 })();
 
 // ---- Mentor / Asesor sign-up modal ----
-// Número de WhatsApp de destino (formato internacional, sin '+' ni espacios).
-// Ajustá este valor si el número o el código de país/área no es correcto.
+
 const MENTOR_WHATSAPP_NUMBER = '5493855075058';
 const MENTOR_MAX_FILE_MB = 8;
 
@@ -409,9 +398,6 @@ const MENTOR_MAX_FILE_MB = 8;
 
         const waUrl = `https://wa.me/${MENTOR_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-        // En navegadores/dispositivos que soportan compartir archivos (mayormente
-        // mobile), intentamos abrir directamente el panel de compartir con la
-        // foto y el texto ya cargados, para que el usuario elija WhatsApp.
         let sharedWithFile = false;
         if (navigator.canShare && navigator.canShare({ files: [foto] })) {
             try {
