@@ -102,7 +102,7 @@ setInterval(updateCountdown, 1000);
 // Editá estos dos arrays para agregar/quitar jurados. Cada "img" apunta a
 // un archivo dentro de /public/jurados/ — solo poné la foto ahí con ese nombre.
 const JURADO_HONOR = [
-    { name: 'Mario Benavente', role: 'Ingeniero en Computación / Intendente de la Ciudad Capital', img: '/public/jurados/honor-1.jpg' },
+    { name: 'Mario Benavente', role: 'Ingeniero en Computación / Intendente de la Ciudad Capital', img: '/public/jurados/intendente.png' },
     { name: 'Jaqueline Digion', role: 'Ing. xxx / DGICSE', img: '/public/jurados/jaqueline.png' },
     { name: 'Monica Gaileola', role: 'Ing. xxx / Dirección de Informatica', img: '/public/jurados/monica.png' },
     { name: 'Dr. Borzarelli', role: 'Rol / CONAE', img: '/public/jurados/honor-2.jpg' },
