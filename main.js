@@ -98,7 +98,7 @@ setInterval(updateCountdown, 1000);
 
 const JURADO_HONOR = [
     { name: 'Mario Benavente', role: 'Ingeniero en Computación / Intendente de la Ciudad Capital', img: '/public/jurados/intendente.png' },
-    { name: 'Jaqueline Digion', role: 'ngeniera en Computación / Esp. en Ingeniería Web / Esp. en Gestión Pública.', img: '/public/jurados/jaqueline.png' },
+    { name: 'Jaqueline Digion', role: 'Ingeniera en Computación / Esp. en Ingeniería Web / Esp. en Gestión Pública.', img: '/public/jurados/jaqueline.png' },
     { name: 'Monica Gaileola', role: 'Ingeninera / Institución', img: '/public/jurados/monica.png' },
     { name: 'Dr. Borzarelli', role: 'Rol / CONAE', img: '/public/jurados/honor-2.jpg' },
 ];
