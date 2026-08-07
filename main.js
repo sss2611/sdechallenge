@@ -205,11 +205,11 @@ function buildJuradoGallery() {
 
 const TEAM = [
     { name: 'Maximiliano Padilla', role: 'Local Lead', img: '/public/equipo/maximiliano.png' },
-    { name: 'Sandra Sanchez', role: 'Rol en el equipo', img: '/public/equipo/sandra.png' },
-    { name: 'Yenina Barrera', role: 'Rol en el equipo', img: '/public/equipo/yenina.png' },
-    { name: 'Carlos', role: 'Rol en el equipo', img: '/public/equipo/carlos.png' },
-    { name: 'Matias', role: 'Rol en el equipo', img: '/public/equipo/matias.jpeg' },
-    { name: 'Gastón Segura', role: 'Rol en el equipo', img: '/public/equipo/conGaston.png' },
+    { name: 'Sandra Sanchez', role: 'Coo (el guarachero jajajajaja)', img: '/public/equipo/sandra.png' },
+    { name: 'Yenina Barrera', role: 'RR.HH.', img: '/public/equipo/yenina.png' },
+    { name: 'Carlos', role: 'Enlace UNSE', img: '/public/equipo/carlos.png' },
+    { name: 'Matias', role: 'Staff', img: '/public/equipo/matias.jpeg' },
+    { name: 'Gastón Segura', role: 'Enlace ITSE', img: '/public/equipo/conGaston.png' },
 ];
 
 (function initTeamShip() {
