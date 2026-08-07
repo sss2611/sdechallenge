@@ -106,7 +106,7 @@ const JURADO_HONOR = [
 const JURADO_EVALUADOR = [
     { name: 'María de los Ángeles Pérez', role: 'Ingeniera en Computación / Programación 3 y 4 - Base de Datos 1 y 2 ITSE', img: '/public/jurados/maria.png' },
     { name: 'Viviana Brito', role: 'Mg.  / institución', img: '/public/jurados/viviana.png' },
-    { name: 'Jorge Galucci', role: 'Ingeniero  / institución', img: '/public/jurados/jorge.png' },
+    { name: 'Jorge Galucci', role: 'Ingeniero en Computación', img: '/public/jurados/jorge.png' },
     { name: 'Sebastian Savino', role: 'Senior Software Enginner / institución', img: '/public/jurados/sebastian.png' },
 ];
 
