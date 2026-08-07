@@ -109,6 +109,11 @@
                     </div>
                 </div>
 
+                <p class="inscripciones-note">
+                    <i class="tdot pulse"></i>
+                    Las inscripciones se habilitan el <strong>25 de agosto de 2026</strong>
+                </p>
+
             </section>
 
 
@@ -277,68 +282,68 @@
     </div>
 
     <!-- MENTOR / ASESOR SIGN-UP MODAL -->
-<div class="mentor-overlay" id="mentor-overlay" hidden></div>
-<div class="mentor-modal" id="mentor-modal" role="dialog" aria-modal="true" aria-labelledby="mentor-title" hidden>
-    <span class="corner tl"></span><span class="corner tr"></span>
-    <span class="corner bl"></span><span class="corner br"></span>
+    <div class="mentor-overlay" id="mentor-overlay" hidden></div>
+    <div class="mentor-modal" id="mentor-modal" role="dialog" aria-modal="true" aria-labelledby="mentor-title" hidden>
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
 
-    <div class="mentor-header">
-        <div>
-            <p class="panel-label">Sumate a la misión</p>
-            <h2 id="mentor-title">Inscripción Mentor/Asesor</h2>
-        </div>
-        <button type="button" class="mentor-close" id="mentor-close" aria-label="Cerrar">✕</button>
-    </div>
-
-    <form class="mentor-form" id="mentor-form" novalidate>
-        <div class="form-row">
-            <label for="mentor-nombre">Nombre</label>
-            <input type="text" id="mentor-nombre" name="nombre" autocomplete="given-name" required>
-        </div>
-
-        <div class="form-row">
-            <label for="mentor-apellido">Apellido</label>
-            <input type="text" id="mentor-apellido" name="apellido" autocomplete="family-name" required>
-        </div>
-
-        <div class="form-row">
-            <span class="form-label-group">Condición</span>
-            <div class="radio-group">
-                <label class="radio-option">
-                    <input type="radio" name="condicion" value="Estudiante" required>
-                    <span>Estudiante</span>
-                </label>
-                <label class="radio-option">
-                    <input type="radio" name="condicion" value="Egresado/a">
-                    <span>Egresado/a</span>
-                </label>
+        <div class="mentor-header">
+            <div>
+                <p class="panel-label">Sumate a la misión</p>
+                <h2 id="mentor-title">Inscripción Mentor/Asesor</h2>
             </div>
+            <button type="button" class="mentor-close" id="mentor-close" aria-label="Cerrar">✕</button>
         </div>
 
-        <div class="form-row">
-            <label for="mentor-hackathon">¿En qué hackathon participaste?</label>
-            <input type="text" id="mentor-hackathon" name="hackathon"
-                placeholder="Ej: NASA Space Apps Challenge Santiago del Estero" required>
-        </div>
+        <form class="mentor-form" id="mentor-form" novalidate>
+            <div class="form-row">
+                <label for="mentor-nombre">Nombre</label>
+                <input type="text" id="mentor-nombre" name="nombre" autocomplete="given-name" required>
+            </div>
 
-        <div class="form-row">
-            <label for="mentor-anio">Año de participación</label>
-            <input type="number" id="mentor-anio" name="anio" min="2000" max="2026" placeholder="Ej: 2025" required>
-        </div>
+            <div class="form-row">
+                <label for="mentor-apellido">Apellido</label>
+                <input type="text" id="mentor-apellido" name="apellido" autocomplete="family-name" required>
+            </div>
 
-        <div class="form-row">
-            <label for="mentor-foto">Foto que lo compruebe (certificado, foto del evento, etc.)</label>
-            <input type="file" id="mentor-foto" name="foto" accept="image/*" required>
-            <p class="form-hint">Formato imagen (JPG/PNG). Máx. 8MB.</p>
-        </div>
+            <div class="form-row">
+                <span class="form-label-group">Condición</span>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="condicion" value="Estudiante" required>
+                        <span>Estudiante</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="condicion" value="Egresado/a">
+                        <span>Egresado/a</span>
+                    </label>
+                </div>
+            </div>
 
-        <p class="form-error" id="mentor-error" role="alert" hidden></p>
+            <div class="form-row">
+                <label for="mentor-hackathon">¿En qué hackathon participaste?</label>
+                <input type="text" id="mentor-hackathon" name="hackathon"
+                    placeholder="Ej: NASA Space Apps Challenge Santiago del Estero" required>
+            </div>
 
-        <button type="submit" class="btn btn-primary mentor-submit">Enviar por WhatsApp</button>
-        <p class="form-note">Se abrirá WhatsApp con tus datos cargados. Si no se adjunta la foto
-            automáticamente, agregala vos en el chat antes de enviar.</p>
-    </form>
-</div>
+            <div class="form-row">
+                <label for="mentor-anio">Año de participación</label>
+                <input type="number" id="mentor-anio" name="anio" min="2000" max="2026" placeholder="Ej: 2025" required>
+            </div>
+
+            <div class="form-row">
+                <label for="mentor-foto">Foto que lo compruebe (certificado, foto del evento, etc.)</label>
+                <input type="file" id="mentor-foto" name="foto" accept="image/*" required>
+                <p class="form-hint">Formato imagen (JPG/PNG). Máx. 8MB.</p>
+            </div>
+
+            <p class="form-error" id="mentor-error" role="alert" hidden></p>
+
+            <button type="submit" class="btn btn-primary mentor-submit">Enviar por WhatsApp</button>
+            <p class="form-note">Se abrirá WhatsApp con tus datos cargados. Si no se adjunta la foto
+                automáticamente, agregala vos en el chat antes de enviar.</p>
+        </form>
+    </div>
 
 </body>
 <script src="main.js"></script>
