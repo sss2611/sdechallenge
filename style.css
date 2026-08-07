@@ -972,6 +972,374 @@ a {
     font-size: 0.95rem;
 }
 
+/* ================================================================
+   TEAM SHIP SLIDER — cápsula/nave con una ventana circular (ojo de
+   buey) en el centro, dentro de la cual van pasando las fotos del
+   equipo. Body en forma de cápsula con morro, aletas y propulsor.
+   ================================================================ */
+.team-section {
+    position: relative;
+    z-index: 1;
+    background: rgba(5, 15, 48, 0.82);
+    padding: 5.5rem 1.5rem;
+    text-align: center;
+    overflow: hidden;
+    border-top: 1px solid rgba(46, 150, 245, 0.15);
+    border-bottom: 1px solid rgba(46, 150, 245, 0.15);
+}
+
+.ship-slider {
+    position: relative;
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+.ship-body {
+    position: relative;
+    height: 320px;
+    margin: 2.5rem auto 0;
+    max-width: 760px;
+    border-radius: 160px;
+    background:
+        linear-gradient(180deg, rgba(46, 150, 245, 0.16) 0%, rgba(3, 10, 36, 0.92) 55%, rgba(3, 10, 36, 0.98) 100%);
+    border: 1px solid rgba(46, 150, 245, 0.35);
+    box-shadow:
+        0 0 0 1px rgba(3, 10, 36, 0.5) inset,
+        0 20px 60px rgba(0, 0, 0, 0.45),
+        0 0 40px rgba(9, 96, 225, 0.12);
+}
+
+/* Morro de la nave, apuntando a la izquierda */
+.ship-nose {
+    position: absolute;
+    top: 50%;
+    left: -1px;
+    width: 120px;
+    height: 320px;
+    transform: translate(-96%, -50%);
+    background: linear-gradient(90deg, rgba(3, 10, 36, 0) 0%, rgba(46, 150, 245, 0.22) 100%);
+    clip-path: polygon(100% 0%, 100% 100%, 0% 50%);
+    border-top: 1px solid rgba(46, 150, 245, 0.35);
+    border-bottom: 1px solid rgba(46, 150, 245, 0.35);
+}
+
+/* Franja decorativa tipo fuselaje */
+.ship-stripe {
+    position: absolute;
+    left: 8%;
+    right: 22%;
+    top: 50%;
+    height: 3px;
+    transform: translateY(-50%);
+    background: repeating-linear-gradient(90deg,
+            var(--neon-yellow) 0px,
+            var(--neon-yellow) 14px,
+            transparent 14px,
+            transparent 24px);
+    opacity: 0.55;
+}
+
+/* Ventana / ojo de buey central */
+.ship-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 280px;
+    height: 280px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.ship-window-ring {
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    background: linear-gradient(160deg, rgba(234, 254, 7, 0.5), rgba(46, 150, 245, 0.3));
+    padding: 0;
+    box-shadow:
+        0 0 0 1px rgba(234, 254, 7, 0.4),
+        0 0 30px rgba(234, 254, 7, 0.15),
+        0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.ship-window-ring::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    background: #030a24;
+}
+
+.ship-window-glass {
+    position: absolute;
+    inset: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: rgba(46, 150, 245, 0.08);
+    box-shadow: 0 0 0 1px rgba(46, 150, 245, 0.3) inset;
+}
+
+.ship-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.6, 0.05, 0.25, 1);
+}
+
+.ship-slide {
+    flex: 0 0 100%;
+    height: 100%;
+    position: relative;
+}
+
+.ship-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: grayscale(0.2) brightness(0.95) contrast(1.05);
+}
+
+.ship-slide--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at 50% 35%, rgba(46, 150, 245, 0.18) 0%, transparent 60%),
+        rgba(46, 150, 245, 0.06);
+    font-size: 2.4rem;
+    color: rgba(46, 150, 245, 0.45);
+}
+
+.ship-window-bolt {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(46, 150, 245, 0.6);
+    box-shadow: 0 0 6px rgba(46, 150, 245, 0.6);
+    z-index: 3;
+}
+
+.ship-window-bolt.b1 {
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ship-window-bolt.b2 {
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ship-window-bolt.b3 {
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.ship-window-bolt.b4 {
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Aletas traseras, arriba y abajo */
+.ship-fin {
+    position: absolute;
+    right: 6%;
+    width: 80px;
+    height: 60px;
+    background: linear-gradient(160deg, rgba(228, 55, 0, 0.55), rgba(228, 55, 0, 0.15));
+    border: 1px solid rgba(228, 55, 0, 0.5);
+}
+
+.ship-fin.fin-top {
+    top: 0;
+    transform: translateY(-55%) skewX(-18deg);
+    border-radius: 4px 10px 0 0;
+}
+
+.ship-fin.fin-bottom {
+    bottom: 0;
+    transform: translateY(55%) skewX(18deg);
+    border-radius: 0 0 10px 4px;
+}
+
+/* Propulsor con "llamas" pulsantes en el extremo derecho */
+.ship-thruster {
+    position: absolute;
+    right: -26px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.ship-thruster .flame {
+    display: block;
+    width: 5px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, var(--neon-yellow), var(--rocket-red));
+    box-shadow: 0 0 10px 2px rgba(234, 254, 7, 0.55);
+    animation: flame-flicker 0.9s ease-in-out infinite;
+}
+
+.ship-thruster .f1 {
+    height: 26px;
+    animation-delay: 0s;
+}
+
+.ship-thruster .f2 {
+    height: 38px;
+    animation-delay: 0.15s;
+}
+
+.ship-thruster .f3 {
+    height: 22px;
+    animation-delay: 0.3s;
+}
+
+@keyframes flame-flicker {
+
+    0%,
+    100% {
+        transform: scaleY(1);
+        opacity: 0.85;
+    }
+
+    50% {
+        transform: scaleY(0.7);
+        opacity: 1;
+    }
+}
+
+/* Nombre / rol de la persona activa en el slider */
+.ship-caption {
+    margin-top: 1.75rem;
+    min-height: 3.2rem;
+}
+
+.ship-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--white);
+}
+
+.ship-role {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--blue-yonder);
+    margin-top: 0.25rem;
+}
+
+/* Controles: flechas + puntos de navegación */
+.ship-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.ship-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(46, 150, 245, 0.4);
+    background: rgba(46, 150, 245, 0.1);
+    color: var(--white);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.ship-btn:hover,
+.ship-btn:focus-visible {
+    background: var(--neon-yellow);
+    border-color: var(--neon-yellow);
+    color: var(--deep-blue);
+    transform: scale(1.08);
+}
+
+.ship-dots {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ship-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(46, 150, 245, 0.35);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.25s ease;
+}
+
+.ship-dot.is-active {
+    background: var(--neon-yellow);
+    box-shadow: 0 0 8px rgba(234, 254, 7, 0.6);
+    transform: scale(1.3);
+}
+
+@media (max-width: 720px) {
+    .ship-body {
+        height: 240px;
+        border-radius: 120px;
+        max-width: 92vw;
+    }
+
+    .ship-nose {
+        width: 80px;
+        height: 240px;
+    }
+
+    .ship-window {
+        width: 190px;
+        height: 190px;
+    }
+
+    .ship-fin {
+        width: 40px;
+        height: 32px;
+    }
+
+    .ship-thruster .f1 {
+        height: 18px;
+    }
+
+    .ship-thruster .f2 {
+        height: 27px;
+    }
+
+    .ship-thruster .f3 {
+        height: 15px;
+    }
+
+    .team-section {
+        padding: 4rem 1rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .ship-track,
+    .ship-thruster .flame,
+    .ship-dot,
+    .ship-btn {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
 /* ---------- Footer ---------- */
 .footer {
     position: relative;
