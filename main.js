@@ -102,15 +102,17 @@ setInterval(updateCountdown, 1000);
 // Editá estos dos arrays para agregar/quitar jurados. Cada "img" apunta a
 // un archivo dentro de /public/jurados/ — solo poné la foto ahí con ese nombre.
 const JURADO_HONOR = [
-    { name: 'Nombre Apellido', role: 'Rol / institución', img: '/public/jurados/honor-1.jpg' },
-    { name: 'Nombre Apellido', role: 'Rol / institución', img: '/public/jurados/honor-2.jpg' },
+    { name: 'Mario Benavente', role: 'Ingeniero en Computación / Intendente de la Ciudad Capital', img: '/public/jurados/honor-1.jpg' },
+    { name: 'Dr. Borzarelli', role: 'Rol / CONAE', img: '/public/jurados/honor-2.jpg' },
 ];
 
 const JURADO_EVALUADOR = [
-    { name: 'Nombre Apellido', role: 'Rol / institución', img: '/public/jurados/evaluador-1.jpg' },
-    { name: 'Nombre Apellido', role: 'Rol / institución', img: '/public/jurados/evaluador-2.jpg' },
-    { name: 'Nombre Apellido', role: 'Rol / institución', img: '/public/jurados/evaluador-3.jpg' },
-    { name: 'Nombre Apellido', role: 'Rol / institución', img: '/public/jurados/evaluador-4.jpg' },
+    { name: 'Jaqueline Digion', role: 'Ing. xxx / DGICSE', img: '/public/jurados/jaqueline.png' },
+    { name: 'Monica Gaileola', role: 'Ing. xxx / Dirección de Informatica', img: '/public/jurados/monica.png' },
+    { name: 'Maria de los Angeles Perez', role: 'Ing. xxx / institución', img: '/public/jurados/maria.png' },
+    { name: 'Viviana Britos', role: 'Mg. xxx / institución', img: '/public/jurados/viviana.png' },
+    { name: 'Jorge Galucci', role: 'Ingeniero xxx / institución', img: '/public/jurados/jorge.png' },
+    { name: 'Sebastian Savino', role: 'Senior Software Enginner / institución', img: '/public/jurados/sebastian.png' },
 ];
 
 function buildJuradoCard(j) {
