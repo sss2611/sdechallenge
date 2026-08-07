@@ -1749,3 +1749,270 @@ body.no-scroll {
         transition: none !important;
     }
 }
+
+/* ================================================================
+   MENTOR / ASESOR MODAL — desliza desde la derecha, mismo lenguaje
+   visual que el drawer del jurado, con un formulario de inscripción.
+   ================================================================ */
+.mentor-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: rgba(2, 7, 26, 0.72);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.mentor-overlay.is-open {
+    opacity: 1;
+}
+
+.mentor-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 41;
+    width: min(520px, 94vw);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(160deg, rgba(7, 23, 63, 0.98) 0%, rgba(3, 10, 36, 0.99) 100%);
+    border-left: 1px solid rgba(46, 150, 245, 0.35);
+    box-shadow: -30px 0 80px rgba(0, 0, 0, 0.55);
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.16, 0.8, 0.24, 1);
+    padding: 2rem 2rem 2.5rem;
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(46, 150, 245, 0.45) transparent;
+}
+
+.mentor-modal::-webkit-scrollbar {
+    width: 6px;
+}
+
+.mentor-modal::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.mentor-modal::-webkit-scrollbar-thumb {
+    background: rgba(46, 150, 245, 0.45);
+    border-radius: 999px;
+}
+
+.mentor-modal::-webkit-scrollbar-thumb:hover {
+    background: rgba(46, 150, 245, 0.75);
+}
+
+.mentor-modal.is-open {
+    transform: translateX(0);
+}
+
+.mentor-modal .corner {
+    border-color: var(--neon-yellow);
+}
+
+.mentor-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px dashed rgba(46, 150, 245, 0.25);
+}
+
+.mentor-header h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.6rem;
+    color: var(--white);
+}
+
+.mentor-header .panel-label {
+    margin-bottom: 0.4rem;
+}
+
+.mentor-close {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(46, 150, 245, 0.4);
+    background: rgba(46, 150, 245, 0.1);
+    color: var(--white);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.mentor-close:hover,
+.mentor-close:focus-visible {
+    background: var(--rocket-red);
+    border-color: var(--rocket-red);
+    transform: rotate(90deg);
+}
+
+/* ---- Form ---- */
+.mentor-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-row label,
+.form-label-group {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue-yonder);
+}
+
+.form-row input[type="text"],
+.form-row input[type="number"] {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--white);
+    background: rgba(46, 150, 245, 0.08);
+    border: 1px solid rgba(46, 150, 245, 0.3);
+    border-radius: 6px;
+    padding: 0.75rem 0.9rem;
+    outline: none;
+    transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.form-row input[type="text"]::placeholder,
+.form-row input[type="number"]::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.form-row input[type="text"]:focus,
+.form-row input[type="number"]:focus {
+    border-color: var(--neon-yellow);
+    background: rgba(46, 150, 245, 0.14);
+}
+
+.form-row input[type="file"] {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(46, 150, 245, 0.08);
+    border: 1px dashed rgba(46, 150, 245, 0.35);
+    border-radius: 6px;
+    padding: 0.75rem 0.9rem;
+    cursor: pointer;
+}
+
+.form-row input[type="file"]::file-selector-button {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--deep-blue);
+    background: var(--neon-yellow);
+    border: none;
+    border-radius: 50px;
+    padding: 0.45rem 0.9rem;
+    margin-right: 0.75rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.form-row input[type="file"]::file-selector-button:hover {
+    transform: scale(1.05);
+}
+
+.form-hint {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.radio-group {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.radio-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--white);
+    background: rgba(46, 150, 245, 0.08);
+    border: 1px solid rgba(46, 150, 245, 0.3);
+    border-radius: 50px;
+    padding: 0.55rem 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.radio-option input[type="radio"] {
+    accent-color: var(--neon-yellow);
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.radio-option:has(input:checked) {
+    border-color: var(--neon-yellow);
+    background: rgba(234, 254, 7, 0.1);
+}
+
+.form-error {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--rocket-red);
+    background: rgba(228, 55, 0, 0.1);
+    border: 1px solid rgba(228, 55, 0, 0.35);
+    border-radius: 6px;
+    padding: 0.65rem 0.85rem;
+}
+
+.mentor-submit {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.25rem;
+}
+
+.form-note {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.45);
+    text-align: center;
+}
+
+@media (max-width: 520px) {
+    .mentor-modal {
+        width: 100vw;
+        padding: 1.5rem 1.25rem 2rem;
+    }
+
+    .mentor-header h2 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .mentor-overlay,
+    .mentor-modal,
+    .mentor-close,
+    .form-row input,
+    .radio-option {
+        transition: none !important;
+    }
+}

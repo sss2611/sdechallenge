@@ -307,3 +307,136 @@ const TEAM = [
     render();
     startAutoplay();
 })();
+
+// ---- Mentor / Asesor sign-up modal ----
+// Número de WhatsApp de destino (formato internacional, sin '+' ni espacios).
+// Ajustá este valor si el número o el código de país/área no es correcto.
+const MENTOR_WHATSAPP_NUMBER = '5493855075058';
+const MENTOR_MAX_FILE_MB = 8;
+
+(function initMentorModal() {
+    const btnOpen = document.getElementById('btn-mentor');
+    const btnClose = document.getElementById('mentor-close');
+    const overlay = document.getElementById('mentor-overlay');
+    const modal = document.getElementById('mentor-modal');
+    const form = document.getElementById('mentor-form');
+    const errorBox = document.getElementById('mentor-error');
+    if (!btnOpen || !overlay || !modal || !form) return;
+
+    let lastFocused = null;
+
+    function openMentor() {
+        lastFocused = document.activeElement;
+        overlay.hidden = false;
+        modal.hidden = false;
+        requestAnimationFrame(() => {
+            overlay.classList.add('is-open');
+            modal.classList.add('is-open');
+        });
+        document.body.classList.add('no-scroll');
+        document.getElementById('mentor-nombre')?.focus();
+        document.addEventListener('keydown', onKeydown);
+    }
+
+    function closeMentor() {
+        overlay.classList.remove('is-open');
+        modal.classList.remove('is-open');
+        document.body.classList.remove('no-scroll');
+        document.removeEventListener('keydown', onKeydown);
+
+        const onEnd = (e) => {
+            if (e.target !== modal || e.propertyName !== 'transform') return;
+            modal.removeEventListener('transitionend', onEnd);
+            overlay.hidden = true;
+            modal.hidden = true;
+        };
+        modal.addEventListener('transitionend', onEnd);
+
+        if (lastFocused) lastFocused.focus();
+    }
+
+    function onKeydown(e) {
+        if (e.key === 'Escape') closeMentor();
+    }
+
+    function showError(msg) {
+        errorBox.textContent = msg;
+        errorBox.hidden = false;
+    }
+
+    function hideError() {
+        errorBox.hidden = true;
+        errorBox.textContent = '';
+    }
+
+    async function onSubmit(e) {
+        e.preventDefault();
+        hideError();
+
+        const data = new FormData(form);
+        const nombre = (data.get('nombre') || '').toString().trim();
+        const apellido = (data.get('apellido') || '').toString().trim();
+        const condicion = (data.get('condicion') || '').toString().trim();
+        const hackathon = (data.get('hackathon') || '').toString().trim();
+        const anio = (data.get('anio') || '').toString().trim();
+        const foto = data.get('foto');
+
+        if (!nombre || !apellido || !condicion || !hackathon || !anio) {
+            showError('Completá todos los campos antes de enviar.');
+            return;
+        }
+
+        if (!foto || !(foto instanceof File) || foto.size === 0) {
+            showError('Adjuntá una foto o comprobante de tu participación.');
+            return;
+        }
+
+        if (foto.size > MENTOR_MAX_FILE_MB * 1024 * 1024) {
+            showError(`La foto no puede superar los ${MENTOR_MAX_FILE_MB}MB.`);
+            return;
+        }
+
+        const MENTOR_WHATSAPP_NUMBER = '5493855075058';
+        
+        const message =
+            `🚀 Inscripción Mentor/Asesor - NASA Space Apps Santiago del Estero\n` +
+            `Nombre: ${nombre}\n` +
+            `Apellido: ${apellido}\n` +
+            `Condición: ${condicion}\n` +
+            `Hackathon en el que participó: ${hackathon}\n` +
+            `Año: ${anio}\n` +
+            `(Adjunto foto/comprobante en este chat)`;
+
+        const waUrl = `https://wa.me/${MENTOR_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+        // En navegadores/dispositivos que soportan compartir archivos (mayormente
+        // mobile), intentamos abrir directamente el panel de compartir con la
+        // foto y el texto ya cargados, para que el usuario elija WhatsApp.
+        let sharedWithFile = false;
+        if (navigator.canShare && navigator.canShare({ files: [foto] })) {
+            try {
+                await navigator.share({
+                    files: [foto],
+                    title: 'Inscripción Mentor/Asesor',
+                    text: message,
+                });
+                sharedWithFile = true;
+            } catch (err) {
+                // El usuario canceló el share o falló: seguimos con el fallback de wa.me
+                sharedWithFile = false;
+            }
+        }
+
+        if (!sharedWithFile) {
+            window.open(waUrl, '_blank', 'noopener');
+        }
+
+        form.reset();
+        closeMentor();
+    }
+
+    btnOpen.addEventListener('click', openMentor);
+    btnClose.addEventListener('click', closeMentor);
+    overlay.addEventListener('click', closeMentor);
+    form.addEventListener('submit', onSubmit);
+})();

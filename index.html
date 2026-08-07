@@ -128,7 +128,9 @@
             </div>
 
             <div class="cta-group">
-                <a href="#" class="btn btn-primary">Inscribite como Mentor/Asesor</a>
+                <button type="button" class="btn btn-primary" id="btn-mentor" aria-haspopup="dialog"
+                    aria-controls="mentor-modal">Inscribite como Mentor/Asesor</button>
+
                 <button type="button" class="btn btn-secondary" id="btn-jurado" aria-haspopup="dialog"
                     aria-controls="jurado-modal">Conocé al Jurado</button>
             </div>
@@ -189,50 +191,50 @@
     </section>
 
     <!-- TEAM SHIP SLIDER -->
-<section class="team-section" id="equipo">
-    <p class="section-eyebrow">Tripulación de la misión</p>
+    <section class="team-section" id="equipo">
+        <p class="section-eyebrow">Tripulación de la misión</p>
 
-    <div class="ship-slider">
-        <div class="ship-body">
-            <div class="ship-nose"></div>
-            <div class="ship-stripe"></div>
+        <div class="ship-slider">
+            <div class="ship-body">
+                <div class="ship-nose"></div>
+                <div class="ship-stripe"></div>
 
-            <div class="ship-window">
-                <div class="ship-window-ring"></div>
-                <div class="ship-window-glass">
-                    <div class="ship-track" id="team-track">
-                        <!-- Slides generados desde main.js a partir del array TEAM,
+                <div class="ship-window">
+                    <div class="ship-window-ring"></div>
+                    <div class="ship-window-glass">
+                        <div class="ship-track" id="team-track">
+                            <!-- Slides generados desde main.js a partir del array TEAM,
                              usando las imágenes en /public/equipo/ -->
+                        </div>
                     </div>
+                    <div class="ship-window-bolt b1"></div>
+                    <div class="ship-window-bolt b2"></div>
+                    <div class="ship-window-bolt b3"></div>
+                    <div class="ship-window-bolt b4"></div>
                 </div>
-                <div class="ship-window-bolt b1"></div>
-                <div class="ship-window-bolt b2"></div>
-                <div class="ship-window-bolt b3"></div>
-                <div class="ship-window-bolt b4"></div>
+
+                <div class="ship-fin fin-top"></div>
+                <div class="ship-fin fin-bottom"></div>
+
+                <div class="ship-thruster">
+                    <span class="flame f1"></span>
+                    <span class="flame f2"></span>
+                    <span class="flame f3"></span>
+                </div>
             </div>
 
-            <div class="ship-fin fin-top"></div>
-            <div class="ship-fin fin-bottom"></div>
+            <div class="ship-caption">
+                <p class="ship-name" id="team-name">&nbsp;</p>
+                <p class="ship-role" id="team-role">&nbsp;</p>
+            </div>
 
-            <div class="ship-thruster">
-                <span class="flame f1"></span>
-                <span class="flame f2"></span>
-                <span class="flame f3"></span>
+            <div class="ship-controls">
+                <button type="button" class="ship-btn ship-prev" id="team-prev" aria-label="Anterior">‹</button>
+                <div class="ship-dots" id="team-dots"></div>
+                <button type="button" class="ship-btn ship-next" id="team-next" aria-label="Siguiente">›</button>
             </div>
         </div>
-
-        <div class="ship-caption">
-            <p class="ship-name" id="team-name">&nbsp;</p>
-            <p class="ship-role" id="team-role">&nbsp;</p>
-        </div>
-
-        <div class="ship-controls">
-            <button type="button" class="ship-btn ship-prev" id="team-prev" aria-label="Anterior">‹</button>
-            <div class="ship-dots" id="team-dots"></div>
-            <button type="button" class="ship-btn ship-next" id="team-next" aria-label="Siguiente">›</button>
-        </div>
-    </div>
-</section>
+    </section>
 
     <footer class="footer">
         <div class="footer-content">
@@ -255,23 +257,87 @@
     </footer>
 
     <!-- JURADO DRAWER / MODAL -->
-<div class="jurado-overlay" id="jurado-overlay" hidden></div>
-<div class="jurado-modal" id="jurado-modal" role="dialog" aria-modal="true" aria-labelledby="jurado-title" hidden>
+    <div class="jurado-overlay" id="jurado-overlay" hidden></div>
+    <div class="jurado-modal" id="jurado-modal" role="dialog" aria-modal="true" aria-labelledby="jurado-title" hidden>
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+
+        <div class="jurado-header">
+            <div>
+                <p class="panel-label">Equipo evaluador</p>
+                <h2 id="jurado-title">Jurado</h2>
+            </div>
+            <button type="button" class="jurado-close" id="jurado-close" aria-label="Cerrar">✕</button>
+        </div>
+
+        <div class="jurado-groups" id="jurado-gallery"></div>
+        <!-- Las tarjetas se generan desde main.js a partir del array JURADOS,
+             usando las imágenes en /public/jurados/ -->
+        </>
+    </div>
+
+    <!-- MENTOR / ASESOR SIGN-UP MODAL -->
+<div class="mentor-overlay" id="mentor-overlay" hidden></div>
+<div class="mentor-modal" id="mentor-modal" role="dialog" aria-modal="true" aria-labelledby="mentor-title" hidden>
     <span class="corner tl"></span><span class="corner tr"></span>
     <span class="corner bl"></span><span class="corner br"></span>
 
-    <div class="jurado-header">
+    <div class="mentor-header">
         <div>
-            <p class="panel-label">Equipo evaluador</p>
-            <h2 id="jurado-title">Jurado</h2>
+            <p class="panel-label">Sumate a la misión</p>
+            <h2 id="mentor-title">Inscripción Mentor/Asesor</h2>
         </div>
-        <button type="button" class="jurado-close" id="jurado-close" aria-label="Cerrar">✕</button>
+        <button type="button" class="mentor-close" id="mentor-close" aria-label="Cerrar">✕</button>
     </div>
 
-    <div class="jurado-groups" id="jurado-gallery"></div>
-        <!-- Las tarjetas se generan desde main.js a partir del array JURADOS,
-             usando las imágenes en /public/jurados/ -->
-    </>
+    <form class="mentor-form" id="mentor-form" novalidate>
+        <div class="form-row">
+            <label for="mentor-nombre">Nombre</label>
+            <input type="text" id="mentor-nombre" name="nombre" autocomplete="given-name" required>
+        </div>
+
+        <div class="form-row">
+            <label for="mentor-apellido">Apellido</label>
+            <input type="text" id="mentor-apellido" name="apellido" autocomplete="family-name" required>
+        </div>
+
+        <div class="form-row">
+            <span class="form-label-group">Condición</span>
+            <div class="radio-group">
+                <label class="radio-option">
+                    <input type="radio" name="condicion" value="Estudiante" required>
+                    <span>Estudiante</span>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="condicion" value="Egresado/a">
+                    <span>Egresado/a</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label for="mentor-hackathon">¿En qué hackathon participaste?</label>
+            <input type="text" id="mentor-hackathon" name="hackathon"
+                placeholder="Ej: NASA Space Apps Challenge Santiago del Estero" required>
+        </div>
+
+        <div class="form-row">
+            <label for="mentor-anio">Año de participación</label>
+            <input type="number" id="mentor-anio" name="anio" min="2000" max="2026" placeholder="Ej: 2025" required>
+        </div>
+
+        <div class="form-row">
+            <label for="mentor-foto">Foto que lo compruebe (certificado, foto del evento, etc.)</label>
+            <input type="file" id="mentor-foto" name="foto" accept="image/*" required>
+            <p class="form-hint">Formato imagen (JPG/PNG). Máx. 8MB.</p>
+        </div>
+
+        <p class="form-error" id="mentor-error" role="alert" hidden></p>
+
+        <button type="submit" class="btn btn-primary mentor-submit">Enviar por WhatsApp</button>
+        <p class="form-note">Se abrirá WhatsApp con tus datos cargados. Si no se adjunta la foto
+            automáticamente, agregala vos en el chat antes de enviar.</p>
+    </form>
 </div>
 
 </body>
