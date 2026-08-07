@@ -426,3 +426,87 @@ const MENTOR_MAX_FILE_MB = 8;
     overlay.addEventListener('click', closeMentor);
     form.addEventListener('submit', onSubmit);
 })();
+
+// ---- Ubicación modal (mapa + galería del lugar) ----
+const LUGAR_FOTOS = [
+    { caption: 'Fachada de acceso', img: '/public/sede/exterior.jpg' },
+    { caption: 'Sala principal', img: '/public/sede/forum.jpg' },
+    { caption: 'Espacio de trabajo', img: '/public/sede/forum1.jpg' },
+    { caption: 'Vista exterior', img: '/public/sede/forum2.jpg' },
+    { caption: 'Fachada de acceso', img: '/public/sede/forum3.jpg' },
+    { caption: 'Sala principal', img: '/public/sede/forum4.jpg' },
+    { caption: 'Espacio de trabajo', img: '/public/sede/forum5.jpg' },
+    { caption: 'Vista exterior', img: '/public/sede/peru.jpg' },
+    { caption: 'Fachada de acceso', img: '/public/sede/sala.jpg' },
+    { caption: 'Sala principal', img: '/public/sede/sala1.jpg' },
+    { caption: 'Espacio de trabajo', img: '/public/sede/sala2.jpg' },
+    { caption: 'Vista exterior', img: '/public/sede/sala3.jpg' },
+    { caption: 'Fachada de acceso', img: '/public/sede/sala4.jpg' },
+    { caption: 'Sala principal', img: '/public/sede/sala5.jpg' },
+];
+
+function buildLugarGallery() {
+    const gallery = document.getElementById('ubicacion-gallery');
+    if (!gallery || gallery.children.length) return;
+
+    LUGAR_FOTOS.forEach((p) => {
+        const fig = document.createElement('figure');
+        fig.className = 'place-photo';
+        fig.innerHTML = `<img src="${p.img}" alt="${p.caption}" loading="lazy">`;
+        gallery.appendChild(fig);
+
+        const img = fig.querySelector('img');
+        img.addEventListener('error', () => {
+            fig.classList.add('place-photo--empty');
+        }, { once: true });
+    });
+}
+
+(function initUbicacionModal() {
+    const btnOpen = document.getElementById('btn-ubicacion');
+    const btnClose = document.getElementById('ubicacion-close');
+    const overlay = document.getElementById('ubicacion-overlay');
+    const modal = document.getElementById('ubicacion-modal');
+    if (!btnOpen || !overlay || !modal) return;
+
+    let lastFocused = null;
+
+    function openUbicacion() {
+        buildLugarGallery();
+        lastFocused = document.activeElement;
+        overlay.hidden = false;
+        modal.hidden = false;
+        requestAnimationFrame(() => {
+            overlay.classList.add('is-open');
+            modal.classList.add('is-open');
+        });
+        document.body.classList.add('no-scroll');
+        btnClose.focus();
+        document.addEventListener('keydown', onKeydown);
+    }
+
+    function closeUbicacion() {
+        overlay.classList.remove('is-open');
+        modal.classList.remove('is-open');
+        document.body.classList.remove('no-scroll');
+        document.removeEventListener('keydown', onKeydown);
+
+        const onEnd = (e) => {
+            if (e.target !== modal || e.propertyName !== 'transform') return;
+            modal.removeEventListener('transitionend', onEnd);
+            overlay.hidden = true;
+            modal.hidden = true;
+        };
+        modal.addEventListener('transitionend', onEnd);
+
+        if (lastFocused) lastFocused.focus();
+    }
+
+    function onKeydown(e) {
+        if (e.key === 'Escape') closeUbicacion();
+    }
+
+    btnOpen.addEventListener('click', openUbicacion);
+    btnClose.addEventListener('click', closeUbicacion);
+    overlay.addEventListener('click', closeUbicacion);
+})();
