@@ -103,15 +103,15 @@ setInterval(updateCountdown, 1000);
 // un archivo dentro de /public/jurados/ — solo poné la foto ahí con ese nombre.
 const JURADO_HONOR = [
     { name: 'Mario Benavente', role: 'Ingeniero en Computación / Intendente de la Ciudad Capital', img: '/public/jurados/intendente.png' },
-    { name: 'Jaqueline Digion', role: 'Ing. xxx / DGICSE', img: '/public/jurados/jaqueline.png' },
-    { name: 'Monica Gaileola', role: 'Ing. xxx / Dirección de Informatica', img: '/public/jurados/monica.png' },
+    { name: 'Jaqueline Digion', role: 'Ingeniera / Institución', img: '/public/jurados/jaqueline.png' },
+    { name: 'Monica Gaileola', role: 'Ingeninera / Institución', img: '/public/jurados/monica.png' },
     { name: 'Dr. Borzarelli', role: 'Rol / CONAE', img: '/public/jurados/honor-2.jpg' },
 ];
 
 const JURADO_EVALUADOR = [
-    { name: 'Maria de los Angeles Perez', role: 'Ing. xxx / institución', img: '/public/jurados/maria.png' },
-    { name: 'Viviana Brito', role: 'Mg. xxx / institución', img: '/public/jurados/viviana.png' },
-    { name: 'Jorge Galucci', role: 'Ingeniero xxx / institución', img: '/public/jurados/jorge.png' },
+    { name: 'Maria de los Angeles Perez', role: 'Ingeniera / institución', img: '/public/jurados/maria.png' },
+    { name: 'Viviana Brito', role: 'Mg.  / institución', img: '/public/jurados/viviana.png' },
+    { name: 'Jorge Galucci', role: 'Ingeniero  / institución', img: '/public/jurados/jorge.png' },
     { name: 'Sebastian Savino', role: 'Senior Software Enginner / institución', img: '/public/jurados/sebastian.png' },
 ];
 
@@ -397,7 +397,7 @@ const MENTOR_MAX_FILE_MB = 8;
         }
 
         const MENTOR_WHATSAPP_NUMBER = '5493855075058';
-        
+
         const message =
             `🚀 Inscripción Mentor/Asesor - NASA Space Apps Santiago del Estero\n` +
             `Nombre: ${nombre}\n` +
