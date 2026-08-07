@@ -385,7 +385,7 @@ const MENTOR_MAX_FILE_MB = 8;
             return;
         }
 
-        const MENTOR_WHATSAPP_NUMBER = '5493855075058';
+        const MENTOR_WHATSAPP_NUMBER = '5493855306840';
 
         const message =
             `🚀 Inscripción Mentor/Asesor - NASA Space Apps Santiago del Estero\n` +
