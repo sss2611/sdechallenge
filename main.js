@@ -98,13 +98,13 @@ setInterval(updateCountdown, 1000);
 
 const JURADO_HONOR = [
     { name: 'Mario Benavente', role: 'Ingeniero en Computación / Intendente de la Ciudad Capital', img: '/public/jurados/intendente.png' },
-    { name: 'Jaqueline Digion', role: 'Ingeniera / Institución', img: '/public/jurados/jaqueline.png' },
+    { name: 'Jaqueline Digion', role: 'ngeniera en Computación / Esp. en Ingeniería Web / Esp. en Gestión Pública.', img: '/public/jurados/jaqueline.png' },
     { name: 'Monica Gaileola', role: 'Ingeninera / Institución', img: '/public/jurados/monica.png' },
     { name: 'Dr. Borzarelli', role: 'Rol / CONAE', img: '/public/jurados/honor-2.jpg' },
 ];
 
 const JURADO_EVALUADOR = [
-    { name: 'Maria de los Angeles Perez', role: 'Ingeniera / institución', img: '/public/jurados/maria.png' },
+    { name: 'María de los Ángeles Pérez', role: 'Ingeniera en Computación / Programación 3 y 4 - Base de Datos 1 y 2 ITSE', img: '/public/jurados/maria.png' },
     { name: 'Viviana Brito', role: 'Mg.  / institución', img: '/public/jurados/viviana.png' },
     { name: 'Jorge Galucci', role: 'Ingeniero  / institución', img: '/public/jurados/jorge.png' },
     { name: 'Sebastian Savino', role: 'Senior Software Enginner / institución', img: '/public/jurados/sebastian.png' },
@@ -205,7 +205,7 @@ function buildJuradoGallery() {
 
 const TEAM = [
     { name: 'Maximiliano Padilla', role: 'Local Lead', img: '/public/equipo/maximiliano.png' },
-    { name: 'Sandra Sanchez', role: 'Coo (el guarachero jajajajaja)', img: '/public/equipo/sandra.png' },
+    { name: 'Sandra Sanchez', role: 'Co-Lead', img: '/public/equipo/sandra.png' },
     { name: 'Yenina Barrera', role: 'RR.HH.', img: '/public/equipo/yenina.png' },
     { name: 'Carlos', role: 'Enlace UNSE', img: '/public/equipo/carlos.png' },
     { name: 'Matias', role: 'Staff', img: '/public/equipo/matias.jpeg' },
