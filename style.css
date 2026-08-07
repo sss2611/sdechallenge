@@ -572,6 +572,329 @@ a {
     color: var(--blue-yonder);
 }
 
+/* ---------- Briefing: single column variant ---------- */
+.briefing-inner--single {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+}
+
+.briefing-inner--single .briefing-data {
+    width: 100%;
+}
+
+/* ================================================================
+   CHRONO SECTION — 3D orbital countdown
+   A standalone, deliberately maximal set-piece: a tilted orrery
+   (three real 3D rings + counter-rotating satellites) orbiting behind
+   a bank of flip cards that physically rotate in 3D on every tick.
+   ================================================================ */
+.chrono-section {
+    position: relative;
+    z-index: 1;
+    background:
+        radial-gradient(ellipse 60% 55% at 50% 38%, rgba(9, 96, 225, 0.28) 0%, transparent 70%),
+        radial-gradient(ellipse 90% 60% at 50% 100%, rgba(228, 55, 0, 0.10) 0%, transparent 60%),
+        #030a24;
+    padding: 5.5rem 1.5rem 4.5rem;
+    overflow: hidden;
+    text-align: center;
+    border-top: 1px solid rgba(46, 150, 245, 0.18);
+    border-bottom: 1px solid rgba(46, 150, 245, 0.18);
+}
+
+.chrono-section::before {
+    /* scanline texture — sells the "HUD readout" feel */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(180deg,
+            rgba(255, 255, 255, 0.025) 0px,
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px,
+            transparent 3px);
+    mix-blend-mode: overlay;
+    pointer-events: none;
+}
+
+.chrono-stage {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    min-height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---- Orrery: tilted 3D rings + orbiting satellites, sits behind the clock ---- */
+.orrery {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 420px;
+    height: 420px;
+    transform: translate(-50%, -50%);
+    perspective: 900px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.orrery-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    transform-style: preserve-3d;
+}
+
+.orrery-ring.ring-1 {
+    border: 1px solid rgba(228, 55, 0, 0.55);
+    animation: ring-spin-1 16s linear infinite;
+}
+
+.orrery-ring.ring-2 {
+    inset: 44px;
+    border: 1px solid rgba(46, 150, 245, 0.55);
+    animation: ring-spin-2 22s linear infinite;
+}
+
+.orrery-ring.ring-3 {
+    inset: 88px;
+    border: 1px dashed rgba(234, 254, 7, 0.4);
+    animation: ring-spin-1 11s linear infinite reverse;
+}
+
+@keyframes ring-spin-1 {
+    from {
+        transform: rotateX(76deg) rotateZ(0deg);
+    }
+
+    to {
+        transform: rotateX(76deg) rotateZ(360deg);
+    }
+}
+
+@keyframes ring-spin-2 {
+    from {
+        transform: rotateX(68deg) rotateY(18deg) rotateZ(0deg);
+    }
+
+    to {
+        transform: rotateX(68deg) rotateY(18deg) rotateZ(-360deg);
+    }
+}
+
+.orrery-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    margin: -7px 0 0 -7px;
+    border-radius: 50%;
+    background: var(--neon-yellow);
+    box-shadow: 0 0 16px 4px rgba(234, 254, 7, 0.7);
+}
+
+.orrery-core-glow {
+    position: absolute;
+    inset: -30px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(234, 254, 7, 0.25) 0%, transparent 70%);
+    animation: core-pulse 3s ease-in-out infinite;
+}
+
+@keyframes core-pulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(0.9);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+
+/* Satellites: classic counter-rotation trick, flattened with scaleY to
+   read as an elliptical 3D orbit under the tilted rings above. */
+.orrery-orbit {
+    position: absolute;
+    inset: 0;
+}
+
+.orrery-orbit .sat {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    margin: -3.5px 0 0 -3.5px;
+    border-radius: 50%;
+}
+
+.sat-1 {
+    background: var(--blue-yonder);
+    box-shadow: 0 0 10px 2px rgba(46, 150, 245, 0.8);
+    animation: orbit-move-a 9s linear infinite;
+}
+
+.sat-2 {
+    background: var(--rocket-red);
+    box-shadow: 0 0 10px 2px rgba(228, 55, 0, 0.8);
+    width: 5px;
+    height: 5px;
+    animation: orbit-move-b 13s linear infinite;
+}
+
+.sat-3 {
+    background: var(--white);
+    box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.6);
+    width: 4px;
+    height: 4px;
+    animation: orbit-move-c 6.5s linear infinite;
+}
+
+@keyframes orbit-move-a {
+    0% {
+        transform: rotate(0deg) translateX(190px) rotate(0deg) scaleY(0.32);
+    }
+
+    100% {
+        transform: rotate(360deg) translateX(190px) rotate(-360deg) scaleY(0.32);
+    }
+}
+
+@keyframes orbit-move-b {
+    0% {
+        transform: rotate(90deg) translateX(150px) rotate(-90deg) scaleY(0.4);
+    }
+
+    100% {
+        transform: rotate(450deg) translateX(150px) rotate(-450deg) scaleY(0.4);
+    }
+}
+
+@keyframes orbit-move-c {
+    0% {
+        transform: rotate(200deg) translateX(105px) rotate(-200deg) scaleY(0.5);
+    }
+
+    100% {
+        transform: rotate(560deg) translateX(105px) rotate(-560deg) scaleY(0.5);
+    }
+}
+
+/* ---- Flip clock: real 3D card flips, sits above the orrery ---- */
+.flip-clock {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+}
+
+.flip-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.flip-card {
+    position: relative;
+    width: 84px;
+    height: 96px;
+    perspective: 400px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg);
+    transition: transform 0.65s cubic-bezier(0.6, 0.05, 0.25, 1);
+}
+
+.flip-card-inner.no-transition {
+    transition: none;
+}
+
+.flip-card-inner.is-flipping {
+    transform: rotateX(-180deg);
+}
+
+.flip-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    backface-visibility: hidden;
+    background:
+        linear-gradient(180deg, rgba(46, 150, 245, 0.16) 0%, rgba(3, 10, 36, 0.9) 100%);
+    border: 1px solid rgba(46, 150, 245, 0.4);
+    box-shadow:
+        0 0 0 1px rgba(3, 10, 36, 0.6) inset,
+        0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+.flip-face::after {
+    /* center hairline, like a real split-flap display */
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: rgba(3, 10, 36, 0.65);
+}
+
+.flip-face span {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.85rem;
+    letter-spacing: 0.02em;
+    color: var(--neon-yellow);
+    text-shadow: 0 0 14px rgba(234, 254, 7, 0.55);
+    font-variant-numeric: tabular-nums;
+}
+
+.flip-face-back {
+    transform: rotateX(180deg);
+}
+
+.flip-divider {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--blue-yonder);
+    opacity: 0.6;
+    padding-bottom: 2rem;
+}
+
+.flip-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue-yonder);
+}
+
+.chrono-caption {
+    position: relative;
+    z-index: 2;
+    margin-top: 3rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.5);
+}
+
 /* ---------- Info Section ---------- */
 .info-section {
     position: relative;
@@ -743,6 +1066,63 @@ a {
     .c-block span {
         font-size: 1.3rem;
     }
+
+    .orrery {
+        width: 300px;
+        height: 300px;
+    }
+
+    .orrery-ring.ring-1 {
+        border-width: 1px;
+    }
+
+    @keyframes orbit-move-a {
+        0% {
+            transform: rotate(0deg) translateX(135px) rotate(0deg) scaleY(0.32);
+        }
+
+        100% {
+            transform: rotate(360deg) translateX(135px) rotate(-360deg) scaleY(0.32);
+        }
+    }
+
+    @keyframes orbit-move-b {
+        0% {
+            transform: rotate(90deg) translateX(107px) rotate(-90deg) scaleY(0.4);
+        }
+
+        100% {
+            transform: rotate(450deg) translateX(107px) rotate(-450deg) scaleY(0.4);
+        }
+    }
+
+    @keyframes orbit-move-c {
+        0% {
+            transform: rotate(200deg) translateX(75px) rotate(-200deg) scaleY(0.5);
+        }
+
+        100% {
+            transform: rotate(560deg) translateX(75px) rotate(-560deg) scaleY(0.5);
+        }
+    }
+
+    .flip-card {
+        width: 58px;
+        height: 68px;
+    }
+
+    .flip-face span {
+        font-size: 1.25rem;
+    }
+
+    .flip-divider {
+        font-size: 1.1rem;
+        padding-bottom: 1.4rem;
+    }
+
+    .chrono-section {
+        padding: 4rem 1rem 3.5rem;
+    }
 }
 
 /* ---------- Reduced motion ---------- */
@@ -751,11 +1131,220 @@ a {
     .satellite,
     .hero::before,
     .star,
-    .tdot.pulse {
+    .tdot.pulse,
+    .orrery-ring,
+    .orrery-orbit .sat,
+    .orrery-core-glow {
         animation: none !important;
+    }
+
+    .flip-card-inner {
+        transition: none !important;
     }
 
     * {
         scroll-behavior: auto !important;
+    }
+}
+
+/* ================================================================
+   JURADO DRAWER — slides in from the left edge, overlay fades behind it
+   ================================================================ */
+.jurado-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: rgba(2, 7, 26, 0.72);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.jurado-overlay.is-open {
+    opacity: 1;
+}
+
+.jurado-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 41;
+    width: min(560px, 92vw);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(160deg, rgba(7, 23, 63, 0.98) 0%, rgba(3, 10, 36, 0.99) 100%);
+    border-right: 1px solid rgba(46, 150, 245, 0.35);
+    box-shadow: 30px 0 80px rgba(0, 0, 0, 0.55);
+    transform: translateX(-100%);
+    transition: transform 0.5s cubic-bezier(0.16, 0.8, 0.24, 1);
+    padding: 2rem 1.75rem 2.5rem;
+    overflow-y: auto;
+}
+
+.jurado-modal.is-open {
+    transform: translateX(0);
+}
+
+.jurado-modal .corner {
+    border-color: var(--neon-yellow);
+}
+
+.jurado-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px dashed rgba(46, 150, 245, 0.25);
+}
+
+.jurado-header h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.9rem;
+    color: var(--white);
+}
+
+.jurado-header .panel-label {
+    margin-bottom: 0.4rem;
+}
+
+.jurado-close {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(46, 150, 245, 0.4);
+    background: rgba(46, 150, 245, 0.1);
+    color: var(--white);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.jurado-close:hover,
+.jurado-close:focus-visible {
+    background: var(--rocket-red);
+    border-color: var(--rocket-red);
+    transform: rotate(90deg);
+}
+
+.jurado-group + .jurado-group {
+    margin-top: 2.25rem;
+}
+
+.jurado-group-title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--neon-yellow);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(234, 254, 7, 0.2);
+}
+
+.jurado-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+.jurado-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.jurado-photo {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(46, 150, 245, 0.25);
+    background: rgba(46, 150, 245, 0.08);
+}
+
+.jurado-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.25) brightness(0.95);
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.jurado-photo--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at 50% 35%, rgba(46, 150, 245, 0.18) 0%, transparent 60%),
+        rgba(46, 150, 245, 0.06);
+}
+
+.jurado-photo--empty img {
+    display: none;
+}
+
+.jurado-photo--empty::after {
+    content: '☆';
+    font-size: 1.8rem;
+    color: rgba(46, 150, 245, 0.45);
+}
+
+.jurado-card:hover .jurado-photo img {
+    transform: scale(1.06);
+    filter: grayscale(0) brightness(1.05);
+}
+
+.jurado-card figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.jurado-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--white);
+}
+
+.jurado-role {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--blue-yonder);
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+@media (max-width: 520px) {
+    .jurado-modal {
+        width: 100vw;
+        padding: 1.5rem 1.25rem 2rem;
+    }
+
+    .jurado-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.9rem;
+    }
+
+    .jurado-header h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .jurado-overlay,
+    .jurado-modal,
+    .jurado-close,
+    .jurado-photo img {
+        transition: none !important;
     }
 }

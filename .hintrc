@@ -7,7 +7,8 @@
       "default",
       {
         "ignore": [
-          "mask-image"
+          "mask-image",
+          "backdrop-filter"
         ]
       }
     ]

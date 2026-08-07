@@ -30,21 +30,87 @@
 
     <section class="hero">
         <div class="hero-content">
-            <p class="eyebrow">Misión local · Santiago del Estero</p>
-
-            <div class="orbit-wrap">
-                <div class="orbit-ring r1"></div>
-                <div class="orbit-ring r2"></div>
-                <div class="orbit-ring r3"></div>
-                <div class="satellite s1"><i></i></div>
-                <div class="satellite s2"><i></i></div>
-                <img src="/public/logos/nasa1.png" alt="NASA Space Apps Santiago del Estero" class="main-logo">
-            </div>
 
             <h1>
-                <span class="nasa-text">NASA</span> <span class="space-text">SPACE APPS</span>
+                <span class="space-text">El desafío espacial más grande del mundo, aterrizando en</span> <span
+                    class="nasa-text">SANTIAGO DEL ESTERO</span>
             </h1>
-            <p class="hero-subtitle">El desafío espacial más grande del mundo, aterrizando en Santiago del Estero</p>
+
+            <!-- CHRONO / 3D ORBITAL COUNTDOWN -->
+            <section class="chrono-section" id="chrono">
+
+                <p class="eyebrow">Misión local · Santiago del Estero</p>
+
+                <p class="chrono-caption">Lanzamiento&nbsp;·&nbsp;14 NOV 2026&nbsp;·&nbsp;08:00 ART&nbsp;·&nbsp;FORUM,
+                    Santiago del Estero</p>
+
+                <div class="orbit-wrap">
+                    <div class="orbit-ring r1"></div>
+                    <div class="orbit-ring r2"></div>
+                    <div class="orbit-ring r3"></div>
+                    <div class="satellite s1"><i></i></div>
+                    <div class="satellite s2"><i></i></div>
+                    <img src="/public/logos/nasa1.png" alt="NASA Space Apps Santiago del Estero" class="main-logo">
+                </div>
+
+                <div class="chrono-stage">
+                    <div class="orrery" aria-hidden="true">
+                        <div class="orrery-ring ring-1"></div>
+                        <div class="orrery-ring ring-2"></div>
+                        <div class="orrery-ring ring-3"></div>
+                        <div class="orrery-core">
+                            <span class="orrery-core-glow"></span>
+                        </div>
+                        <div class="orrery-orbit orbit-1"><span class="sat sat-1"></span></div>
+                        <div class="orrery-orbit orbit-2"><span class="sat sat-2"></span></div>
+                        <div class="orrery-orbit orbit-3"><span class="sat sat-3"></span></div>
+                    </div>
+
+                    <div class="flip-clock" id="flip-clock" role="timer" aria-live="off">
+                        <div class="flip-unit">
+                            <div class="flip-card" id="flip-days">
+                                <div class="flip-card-inner">
+                                    <div class="flip-face flip-face-front"><span>000</span></div>
+                                    <div class="flip-face flip-face-back"><span>000</span></div>
+                                </div>
+                            </div>
+                            <span class="flip-label">Días</span>
+                        </div>
+                        <div class="flip-divider" aria-hidden="true">·</div>
+                        <div class="flip-unit">
+                            <div class="flip-card" id="flip-hours">
+                                <div class="flip-card-inner">
+                                    <div class="flip-face flip-face-front"><span>00</span></div>
+                                    <div class="flip-face flip-face-back"><span>00</span></div>
+                                </div>
+                            </div>
+                            <span class="flip-label">Hs</span>
+                        </div>
+                        <div class="flip-divider" aria-hidden="true">·</div>
+                        <div class="flip-unit">
+                            <div class="flip-card" id="flip-min">
+                                <div class="flip-card-inner">
+                                    <div class="flip-face flip-face-front"><span>00</span></div>
+                                    <div class="flip-face flip-face-back"><span>00</span></div>
+                                </div>
+                            </div>
+                            <span class="flip-label">Min</span>
+                        </div>
+                        <div class="flip-divider" aria-hidden="true">·</div>
+                        <div class="flip-unit">
+                            <div class="flip-card" id="flip-sec">
+                                <div class="flip-card-inner">
+                                    <div class="flip-face flip-face-front"><span>00</span></div>
+                                    <div class="flip-face flip-face-back"><span>00</span></div>
+                                </div>
+                            </div>
+                            <span class="flip-label">Seg</span>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
 
             <div class="video-section">
                 <div class="video-frame">
@@ -58,19 +124,20 @@
                         </iframe>
                     </div>
                 </div>
-                <span class="video-label">▶ Conocé el desafío</span>
+                <!-- <span class="video-label">▶ Conocé el desafío</span> -->
             </div>
 
             <div class="cta-group">
-                <a href="#" class="btn btn-primary">Inscribite Ahora</a>
-                <a href="#desafios" class="btn btn-secondary">Ver Desafíos</a>
+                <a href="#" class="btn btn-primary">Inscribite como Mentor/Asesor</a>
+                <button type="button" class="btn btn-secondary" id="btn-jurado" aria-haspopup="dialog"
+                    aria-controls="jurado-modal">Conocé al Jurado</button>
             </div>
         </div>
     </section>
 
-    <!-- MISSION BRIEFING / COUNTDOWN -->
+    <!-- MISSION BRIEFING -->
     <section class="briefing">
-        <div class="briefing-inner">
+        <div class="briefing-inner briefing-inner--single">
             <div class="briefing-data">
                 <p class="panel-label">Briefing de la misión</p>
                 <div class="data-row">
@@ -91,17 +158,6 @@
                 </div>
             </div>
 
-            <div class="countdown-panel">
-                <span class="corner tl"></span><span class="corner tr"></span>
-                <span class="corner bl"></span><span class="corner br"></span>
-                <p class="panel-label">Cuenta regresiva al lanzamiento</p>
-                <div class="countdown" id="countdown">
-                    <div class="c-block"><span id="cd-days">00</span><label>Días</label></div>
-                    <div class="c-block"><span id="cd-hours">00</span><label>Hs</label></div>
-                    <div class="c-block"><span id="cd-min">00</span><label>Min</label></div>
-                    <div class="c-block"><span id="cd-sec">00</span><label>Seg</label></div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -151,6 +207,26 @@
             </div>
         </div>
     </footer>
+
+    <!-- JURADO DRAWER / MODAL -->
+<div class="jurado-overlay" id="jurado-overlay" hidden></div>
+<div class="jurado-modal" id="jurado-modal" role="dialog" aria-modal="true" aria-labelledby="jurado-title" hidden>
+    <span class="corner tl"></span><span class="corner tr"></span>
+    <span class="corner bl"></span><span class="corner br"></span>
+
+    <div class="jurado-header">
+        <div>
+            <p class="panel-label">Equipo evaluador</p>
+            <h2 id="jurado-title">Jurado</h2>
+        </div>
+        <button type="button" class="jurado-close" id="jurado-close" aria-label="Cerrar">✕</button>
+    </div>
+
+    <div class="jurado-gallery" id="jurado-gallery">
+        <!-- Las tarjetas se generan desde main.js a partir del array JURADOS,
+             usando las imágenes en /public/jurados/ -->
+    </div>
+</div>
 
 </body>
 <script src="main.js"></script>
