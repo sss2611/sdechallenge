@@ -207,8 +207,8 @@ const TEAM = [
     { name: 'Maximiliano Padilla', role: 'Local Lead', img: '/public/equipo/maximiliano.png' },
     { name: 'Sandra Sanchez', role: 'Rol en el equipo', img: '/public/equipo/sandra.png' },
     { name: 'Yenina Barrera', role: 'Rol en el equipo', img: '/public/equipo/yenina.png' },
-    { name: 'Carlos Nose', role: 'Rol en el equipo', img: '/public/equipo/carlos.png' },
-    { name: 'Matias Nose', role: 'Rol en el equipo', img: '/public/equipo/matias.png' },
+    { name: 'Carlos', role: 'Rol en el equipo', img: '/public/equipo/carlos.png' },
+    { name: 'Matias', role: 'Rol en el equipo', img: '/public/equipo/matias.jpeg' },
     { name: 'Gastón Segura', role: 'Rol en el equipo', img: '/public/equipo/conGaston.png' },
 ];
 
