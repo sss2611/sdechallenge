@@ -300,7 +300,7 @@ const TEAM = [
 
 // ---- Mentor / Asesor sign-up modal ----
 
-const MENTOR_WHATSAPP_NUMBER = '5493855075058';
+const MENTOR_WHATSAPP_NUMBER = '5493855306840';
 const MENTOR_MAX_FILE_MB = 8;
 
 (function initMentorModal() {
@@ -358,68 +358,39 @@ const MENTOR_MAX_FILE_MB = 8;
         errorBox.textContent = '';
     }
 
-    async function onSubmit(e) {
-        e.preventDefault();
-        hideError();
+    function onSubmit(e) {
+    e.preventDefault();
+    hideError();
 
-        const data = new FormData(form);
-        const nombre = (data.get('nombre') || '').toString().trim();
-        const apellido = (data.get('apellido') || '').toString().trim();
-        const condicion = (data.get('condicion') || '').toString().trim();
-        const hackathon = (data.get('hackathon') || '').toString().trim();
-        const anio = (data.get('anio') || '').toString().trim();
-        const foto = data.get('foto');
+    const data = new FormData(form);
+    const nombre = (data.get('nombre') || '').toString().trim();
+    const apellido = (data.get('apellido') || '').toString().trim();
+    const condicion = (data.get('condicion') || '').toString().trim();
+    const hackathon = (data.get('hackathon') || '').toString().trim();
+    const anio = (data.get('anio') || '').toString().trim();
 
-        if (!nombre || !apellido || !condicion || !hackathon || !anio) {
-            showError('Completá todos los campos antes de enviar.');
-            return;
-        }
-
-        if (!foto || !(foto instanceof File) || foto.size === 0) {
-            showError('Adjuntá una foto o comprobante de tu participación.');
-            return;
-        }
-
-        if (foto.size > MENTOR_MAX_FILE_MB * 1024 * 1024) {
-            showError(`La foto no puede superar los ${MENTOR_MAX_FILE_MB}MB.`);
-            return;
-        }
-
-        const MENTOR_WHATSAPP_NUMBER = '5493855306840';
-
-        const message =
-            `🚀 Inscripción Mentor/Asesor - NASA Space Apps Santiago del Estero\n` +
-            `Nombre: ${nombre}\n` +
-            `Apellido: ${apellido}\n` +
-            `Condición: ${condicion}\n` +
-            `Hackathon en el que participó: ${hackathon}\n` +
-            `Año: ${anio}\n` +
-            `(Adjunto foto/comprobante en este chat)`;
-
-        const waUrl = `https://wa.me/${MENTOR_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-
-        let sharedWithFile = false;
-        if (navigator.canShare && navigator.canShare({ files: [foto] })) {
-            try {
-                await navigator.share({
-                    files: [foto],
-                    title: 'Inscripción Mentor/Asesor',
-                    text: message,
-                });
-                sharedWithFile = true;
-            } catch (err) {
-                // El usuario canceló el share o falló: seguimos con el fallback de wa.me
-                sharedWithFile = false;
-            }
-        }
-
-        if (!sharedWithFile) {
-            window.open(waUrl, '_blank', 'noopener');
-        }
-
-        form.reset();
-        closeMentor();
+    if (!nombre || !apellido || !condicion || !hackathon || !anio) {
+        showError('Completá todos los campos antes de enviar.');
+        return;
     }
+
+    const message =
+        `🚀 Inscripción Mentor/Asesor - NASA Space Apps Santiago del Estero\n` +
+        `Nombre: ${nombre}\n` +
+        `Apellido: ${apellido}\n` +
+        `Condición: ${condicion}\n` +
+        `Hackathon en el que participó: ${hackathon}\n` +
+        `Año: ${anio}\n\n` +
+        `⚠️ Por favor, enviá una foto o comprobante de tu participación en este mismo chat.`;
+
+    const waUrl = `https://wa.me/${MENTOR_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+    // Siempre abre WhatsApp directo al contacto configurado.
+    window.open(waUrl, '_blank', 'noopener');
+
+    form.reset();
+    closeMentor();
+}
 
     btnOpen.addEventListener('click', openMentor);
     btnClose.addEventListener('click', closeMentor);

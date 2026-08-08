@@ -2043,6 +2043,21 @@ body.no-scroll {
     color: rgba(255, 255, 255, 0.4);
 }
 
+.form-warning {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--neon-yellow);
+    background: rgba(234, 254, 7, 0.08);
+    border: 1px solid rgba(234, 254, 7, 0.3);
+    border-radius: 8px;
+    padding: 0.75rem 0.9rem;
+}
+
+.form-warning strong {
+    color: var(--white);
+}
+
 .radio-group {
     display: flex;
     gap: 0.75rem;
