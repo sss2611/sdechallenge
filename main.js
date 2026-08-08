@@ -209,7 +209,6 @@ const TEAM = [
     { name: 'Yenina Barrera', role: 'RR.HH.', img: '/public/equipo/yenina.png' },
     { name: 'Carlos', role: 'Enlace UNSE', img: '/public/equipo/carlos.png' },
     { name: 'Matias', role: 'Staff', img: '/public/equipo/matias.jpeg' },
-    { name: 'Gastón Segura', role: 'Enlace ITSE', img: '/public/equipo/conGaston.png' },
 ];
 
 (function initTeamShip() {
@@ -480,4 +479,154 @@ function buildLugarGallery() {
     btnOpen.addEventListener('click', openUbicacion);
     btnClose.addEventListener('click', closeUbicacion);
     overlay.addEventListener('click', closeUbicacion);
+})();
+
+// ---- Thanks ship reel (floating tab + modal) ----
+// Editá este array para agregar/quitar agradecimientos. Cada "img" apunta
+// a un archivo dentro de /public/agradecimientos/ — solo poné la foto ahí
+// con ese nombre.
+const THANKS = [
+    { name: 'Mariela Nasif', role: 'Ministra de Educación', img: '/public/agradecimiento/ministra.png' },
+    { name: 'Mario Benavente', role: 'Intendente de la Ciudad Capital', img: '/public/agradecimiento/conMinistra.png' },
+    { name: 'Gaston Segura', role: 'Enlace ITSE', img: '/public/agradecimiento/conGaston.png' },
+];
+
+let thanksShipControls = null;
+
+function buildThanksShip() {
+    const track = document.getElementById('thanks-track');
+    const dotsWrap = document.getElementById('thanks-dots');
+    const nameEl = document.getElementById('thanks-name');
+    const roleEl = document.getElementById('thanks-role');
+    const btnPrev = document.getElementById('thanks-prev');
+    const btnNext = document.getElementById('thanks-next');
+    if (!track || !THANKS.length) return null;
+    if (track.children.length) return thanksShipControls; // ya construido
+
+    let index = 0;
+    let timer = null;
+    const AUTOPLAY_MS = 4500;
+
+    THANKS.forEach((person) => {
+        const slide = document.createElement('div');
+        slide.className = 'ship-slide';
+        slide.innerHTML = `<img src="${person.img}" alt="${person.name}" loading="lazy">`;
+
+        const img = slide.querySelector('img');
+        img.addEventListener('error', () => {
+            slide.classList.add('ship-slide--empty');
+            slide.innerHTML = '☆';
+        }, { once: true });
+
+        track.appendChild(slide);
+    });
+
+    const dots = THANKS.map((person, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'ship-dot';
+        dot.setAttribute('aria-label', person.name);
+        dot.addEventListener('click', () => goTo(i, true));
+        dotsWrap.appendChild(dot);
+        return dot;
+    });
+
+    function render() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('is-active', i === index));
+        const current = THANKS[index];
+        nameEl.textContent = current.name;
+        roleEl.textContent = current.role;
+    }
+
+    function goTo(i, userInitiated) {
+        index = (i + THANKS.length) % THANKS.length;
+        render();
+        if (userInitiated) restartAutoplay();
+    }
+
+    function next() { goTo(index + 1); }
+    function prev() { goTo(index - 1); }
+
+    function startAutoplay() {
+        stopAutoplay();
+        timer = setInterval(next, AUTOPLAY_MS);
+    }
+
+    function stopAutoplay() {
+        if (timer) clearInterval(timer);
+        timer = null;
+    }
+
+    function restartAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+    }
+
+    btnNext.addEventListener('click', () => goTo(index + 1, true));
+    btnPrev.addEventListener('click', () => goTo(index - 1, true));
+
+    const shipSlider = document.querySelector('#thanks-modal .ship-slider');
+    if (shipSlider) {
+        shipSlider.addEventListener('mouseenter', stopAutoplay);
+        shipSlider.addEventListener('mouseleave', startAutoplay);
+        shipSlider.addEventListener('focusin', stopAutoplay);
+        shipSlider.addEventListener('focusout', startAutoplay);
+    }
+
+    render();
+
+    thanksShipControls = { startAutoplay, stopAutoplay };
+    return thanksShipControls;
+}
+
+(function initThanksModal() {
+    const btnOpen = document.getElementById('btn-thanks');
+    const btnClose = document.getElementById('thanks-close');
+    const overlay = document.getElementById('thanks-overlay');
+    const modal = document.getElementById('thanks-modal');
+    if (!btnOpen || !overlay || !modal) return;
+
+    let lastFocused = null;
+
+    function openThanks() {
+        const controls = buildThanksShip();
+        lastFocused = document.activeElement;
+        overlay.hidden = false;
+        modal.hidden = false;
+        requestAnimationFrame(() => {
+            overlay.classList.add('is-open');
+            modal.classList.add('is-open');
+        });
+        document.body.classList.add('no-scroll');
+        btnClose.focus();
+        document.addEventListener('keydown', onKeydown);
+        if (controls) controls.startAutoplay();
+    }
+
+    function closeThanks() {
+        overlay.classList.remove('is-open');
+        modal.classList.remove('is-open');
+        document.body.classList.remove('no-scroll');
+        document.removeEventListener('keydown', onKeydown);
+        if (thanksShipControls) thanksShipControls.stopAutoplay();
+
+        const onEnd = (e) => {
+            if (e.target !== modal || e.propertyName !== 'transform') return;
+            modal.removeEventListener('transitionend', onEnd);
+            overlay.hidden = true;
+            modal.hidden = true;
+        };
+        modal.addEventListener('transitionend', onEnd);
+
+        if (lastFocused) lastFocused.focus();
+    }
+
+    function onKeydown(e) {
+        if (e.key === 'Escape') closeThanks();
+    }
+
+    btnOpen.addEventListener('click', openThanks);
+    btnClose.addEventListener('click', closeThanks);
+    overlay.addEventListener('click', closeThanks);
 })();

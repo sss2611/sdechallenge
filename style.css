@@ -2423,3 +2423,214 @@ body.no-scroll {
         transition: none !important;
     }
 }
+
+/* ================================================================
+   FLOATING THANKS TAB — fijo al borde derecho, siempre centrado
+   verticalmente, altura escala con el viewport (~20% de la pantalla)
+   y se adapta entre dispositivos con clamp() + media query mobile.
+   ================================================================ */
+.thanks-tab {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translate(35%, -50%);
+    z-index: 45;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 64px;
+    height: clamp(160px, 20vh, 260px);
+    padding: 1rem 0.5rem;
+    border: 1px solid rgba(46, 150, 245, 0.4);
+    border-right: none;
+    border-radius: 20px 0 0 20px;
+    background: linear-gradient(160deg, rgba(46, 150, 245, 0.22) 0%, rgba(3, 10, 36, 0.96) 70%);
+    box-shadow:
+        -10px 10px 40px rgba(0, 0, 0, 0.45),
+        0 0 24px rgba(46, 150, 245, 0.15);
+    color: var(--white);
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.thanks-tab:hover,
+.thanks-tab:focus-visible {
+    transform: translate(0%, -50%);
+    box-shadow:
+        -14px 10px 50px rgba(0, 0, 0, 0.55),
+        0 0 34px rgba(234, 254, 7, 0.25);
+}
+
+.thanks-tab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(234, 254, 7, 0.12);
+    color: var(--neon-yellow);
+    flex-shrink: 0;
+}
+
+.thanks-tab-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+    .thanks-tab {
+        width: 52px;
+        height: clamp(130px, 18vh, 200px);
+        transform: translate(45%, -50%);
+    }
+
+    .thanks-tab:hover,
+    .thanks-tab:focus-visible {
+        transform: translate(10%, -50%);
+    }
+
+    .thanks-tab-icon {
+        width: 26px;
+        height: 26px;
+    }
+
+    .thanks-tab-text {
+        font-size: 0.72rem;
+    }
+}
+
+/* ---- Modal de agradecimientos: mismo fade+scale centrado que ubicación ---- */
+.thanks-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgba(2, 7, 26, 0.75);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.thanks-overlay.is-open {
+    opacity: 1;
+}
+
+.thanks-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 51;
+    width: min(820px, 94vw);
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translate(-50%, -50%) scale(0.94);
+    opacity: 0;
+    background: linear-gradient(160deg, rgba(7, 23, 63, 0.98) 0%, rgba(3, 10, 36, 0.99) 100%);
+    border: 1px solid rgba(46, 150, 245, 0.3);
+    border-radius: 14px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    transition: transform 0.4s cubic-bezier(0.16, 0.8, 0.24, 1), opacity 0.3s ease;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(46, 150, 245, 0.45) transparent;
+}
+
+.thanks-modal.is-open {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.thanks-modal::-webkit-scrollbar {
+    width: 6px;
+}
+
+.thanks-modal::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.thanks-modal::-webkit-scrollbar-thumb {
+    background: rgba(46, 150, 245, 0.45);
+    border-radius: 999px;
+}
+
+.thanks-modal .corner {
+    border-color: var(--neon-yellow);
+}
+
+.thanks-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px dashed rgba(46, 150, 245, 0.25);
+}
+
+.thanks-header h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.7rem;
+    color: var(--white);
+}
+
+.thanks-header .panel-label {
+    margin-bottom: 0.3rem;
+}
+
+.thanks-close {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(46, 150, 245, 0.4);
+    background: rgba(46, 150, 245, 0.1);
+    color: var(--white);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.thanks-close:hover,
+.thanks-close:focus-visible {
+    background: var(--rocket-red);
+    border-color: var(--rocket-red);
+    transform: rotate(90deg);
+}
+
+.thanks-modal .ship-slider--compact {
+    max-width: 640px;
+    margin: 1.5rem auto 0;
+}
+
+.thanks-modal .ship-slider--compact .ship-body {
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 520px) {
+    .thanks-modal {
+        width: 94vw;
+        padding: 1.5rem 1.25rem;
+    }
+
+    .thanks-header h2 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .thanks-tab,
+    .thanks-overlay,
+    .thanks-modal,
+    .thanks-close {
+        transition: none !important;
+    }
+}
