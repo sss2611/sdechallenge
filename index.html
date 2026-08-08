@@ -437,6 +437,77 @@
         </div>
     </div>
 
+    <!-- FLOATING THANKS TAB -->
+<button type="button" class="thanks-tab" id="btn-thanks" aria-haspopup="dialog" aria-controls="thanks-modal">
+    <span class="thanks-tab-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09" />
+            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05" />
+            <path
+                d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z" />
+        </svg>
+    </span>
+    <span class="thanks-tab-text">¡Agradecimientos!</span>
+</button>
+
+<!-- THANKS MODAL: reel de fotos en forma de nave, mismo lenguaje que el del equipo -->
+<div class="thanks-overlay" id="thanks-overlay" hidden></div>
+<div class="thanks-modal" id="thanks-modal" role="dialog" aria-modal="true" aria-labelledby="thanks-title" hidden>
+    <span class="corner tl"></span><span class="corner tr"></span>
+    <span class="corner bl"></span><span class="corner br"></span>
+
+    <div class="thanks-header">
+        <div>
+            <p class="panel-label">Tripulación de apoyo</p>
+            <h2 id="thanks-title">¡Agradecimientos!</h2>
+        </div>
+        <button type="button" class="thanks-close" id="thanks-close" aria-label="Cerrar">✕</button>
+    </div>
+
+    <div class="ship-slider ship-slider--compact">
+        <div class="ship-body">
+            <div class="ship-nose"></div>
+            <div class="ship-stripe"></div>
+
+            <div class="ship-window">
+                <div class="ship-window-ring"></div>
+                <div class="ship-window-glass">
+                    <div class="ship-track" id="thanks-track">
+                        <!-- Slides generados desde main.js a partir del array THANKS,
+                         usando las imágenes en /public/agradecimientos/ -->
+                    </div>
+                </div>
+                <div class="ship-window-bolt b1"></div>
+                <div class="ship-window-bolt b2"></div>
+                <div class="ship-window-bolt b3"></div>
+                <div class="ship-window-bolt b4"></div>
+            </div>
+
+            <div class="ship-fin fin-top"></div>
+            <div class="ship-fin fin-bottom"></div>
+
+            <div class="ship-thruster">
+                <span class="flame f1"></span>
+                <span class="flame f2"></span>
+                <span class="flame f3"></span>
+            </div>
+        </div>
+
+        <div class="ship-caption">
+            <p class="ship-name" id="thanks-name">&nbsp;</p>
+            <p class="ship-role" id="thanks-role">&nbsp;</p>
+        </div>
+
+        <div class="ship-controls">
+            <button type="button" class="ship-btn ship-prev" id="thanks-prev" aria-label="Anterior">‹</button>
+            <div class="ship-dots" id="thanks-dots"></div>
+            <button type="button" class="ship-btn ship-next" id="thanks-next" aria-label="Siguiente">›</button>
+        </div>
+    </div>
+</div>
+
 </body>
 <script src="main.js"></script>
 
